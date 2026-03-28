@@ -73,13 +73,13 @@ export default function Footer() {
                   href="tel:+5906603095"
                   className="flex items-center gap-2 text-sm text-white/60 hover:text-cyan transition-colors"
                 >
-                  <Phone size={14} /> +590 660-30-95
+                  <Phone size={14} /> +590 690-30-40-95
                 </a>
               </li>
               <li>
                 <span className="flex items-start gap-2 text-sm text-white/60">
                   <MapPin size={14} className="mt-0.5 shrink-0" />
-                  37 allée des Perdrix<br />97122 Baie-Mahault, Guadeloupe
+                  Résidence Destrellan, 37 allée des Perdrix<br />97122 Baie-Mahault, Guadeloupe
                 </span>
               </li>
               <li>
