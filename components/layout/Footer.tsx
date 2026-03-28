@@ -70,16 +70,16 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="tel:+5906603095"
+                  href="tel:+590690304095"
                   className="flex items-center gap-2 text-sm text-white/60 hover:text-cyan transition-colors"
                 >
-                  <Phone size={14} /> +590 690-30-40-95
+                  <Phone size={14} /> +590 690 30 40 95
                 </a>
               </li>
               <li>
                 <span className="flex items-start gap-2 text-sm text-white/60">
                   <MapPin size={14} className="mt-0.5 shrink-0" />
-                  Résidence Destrellan<br />37 allée des Perdrix<br />97122 Baie-Mahault, Guadeloupe
+                  Résidence Destrellan<br />37 allée des Perdrix<br />97122 Baie-Mahault
                 </span>
               </li>
               <li>
