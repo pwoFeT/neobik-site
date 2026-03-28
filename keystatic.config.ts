@@ -4,12 +4,6 @@ export default config({
   storage: {
     kind: 'github',
     repo: 'pwofet/neobik-site',
-    authStrategy: {
-      kind: 'oauth-app',
-      clientId: process.env.KEYSTATIC_GITHUB_CLIENT_ID!,
-      clientSecret: process.env.KEYSTATIC_GITHUB_CLIENT_SECRET!,
-      redirectUrl: 'https://neobik.com/api/keystatic/github/oauth/callback',
-    },
   },
   ui: {
     brand: {
@@ -46,7 +40,7 @@ export default config({
           defaultValue: 'ia',
         }),
         coverImage: fields.image({
-          label: "Image de couverture",
+          label: 'Image de couverture',
           directory: 'public/images/blog',
           publicPath: '/images/blog',
         }),
