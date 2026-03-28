@@ -3,7 +3,7 @@
 export function WhatsAppButton() {
   return (
     <a
-      href="https://wa.me/590660309595?text=Bonjour%20Gilles%2C%20je%20vous%20contacte%20depuis%20le%20site%20Neobik."
+      href="https://wa.me/590690304095?text=Bonjour%20Gilles%2C%20je%20vous%20contacte%20depuis%20le%20site%20Neobik."
       target="_blank"
       rel="noopener noreferrer"
       className="whatsapp-btn"
