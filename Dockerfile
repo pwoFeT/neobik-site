@@ -25,11 +25,13 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 # Copy built files
+RUN mkdir -p ./public
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
 # Content directory (blog posts) — mounted as volume in production
+RUN mkdir -p ./content
 COPY --from=builder /app/content ./content
 
 # Set correct permissions
