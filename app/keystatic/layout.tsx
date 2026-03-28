@@ -3,5 +3,11 @@ export default function KeystaticLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <html>
+      <body style={{ margin: 0, padding: 0, background: 'white' }}>
+        {children}
+      </body>
+    </html>
+  );
 }
