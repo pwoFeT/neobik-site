@@ -4,6 +4,12 @@ export default config({
   storage: {
     kind: 'github',
     repo: 'pwofet/neobik-site',
+    authStrategy: {
+      kind: 'oauth-app',
+      clientId: process.env.KEYSTATIC_GITHUB_CLIENT_ID!,
+      clientSecret: process.env.KEYSTATIC_GITHUB_CLIENT_SECRET!,
+      redirectUrl: 'https://neobik.com/api/keystatic/github/oauth/callback',
+    },
   },
   ui: {
     brand: {
