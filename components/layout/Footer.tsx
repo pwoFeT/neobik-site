@@ -79,7 +79,7 @@ export default function Footer() {
               <li>
                 <span className="flex items-start gap-2 text-sm text-white/60">
                   <MapPin size={14} className="mt-0.5 shrink-0" />
-                  Résidence Destrellan, 37 allée des Perdrix<br />97122 Baie-Mahault, Guadeloupe
+                  Résidence Destrellan<br />37 allée des Perdrix<br />97122 Baie-Mahault, Guadeloupe
                 </span>
               </li>
               <li>
