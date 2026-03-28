@@ -1,0 +1,138 @@
+{
+  "name": "Neobik — Newsletter IA hebdomadaire",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [{ "field": "cronExpression", "expression": "0 8 * * 5" }]
+        }
+      },
+      "name": "⏰ Déclencheur Vendredi 8h",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://api.rss2json.com/v1/api.json",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            { "name": "rss_url", "value": "https://www.technologyreview.com/feed/" },
+            { "name": "api_key", "value": "VOTRE_CLE_RSS2JSON" },
+            { "name": "count", "value": "5" }
+          ]
+        },
+        "options": {}
+      },
+      "name": "📡 MIT Tech Review",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [460, 180]
+    },
+    {
+      "parameters": {
+        "url": "https://api.rss2json.com/v1/api.json",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            { "name": "rss_url", "value": "https://importai.substack.com/feed" },
+            { "name": "api_key", "value": "VOTRE_CLE_RSS2JSON" },
+            { "name": "count", "value": "3" }
+          ]
+        },
+        "options": {}
+      },
+      "name": "📡 Import AI",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://api.rss2json.com/v1/api.json",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            { "name": "rss_url", "value": "https://www.cnil.fr/fr/rss.xml" },
+            { "name": "api_key", "value": "VOTRE_CLE_RSS2JSON" },
+            { "name": "count", "value": "3" }
+          ]
+        },
+        "options": {}
+      },
+      "name": "📡 CNIL",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [460, 420]
+    },
+    {
+      "parameters": {
+        "jsCode": "const sources = [\n  ...($('📡 MIT Tech Review').all()[0]?.json?.items || []),\n  ...($('📡 Import AI').all()[0]?.json?.items || []),\n  ...($('📡 CNIL').all()[0]?.json?.items || [])\n];\n\nconst articles = sources.slice(0, 10).map(item => ({\n  title: item.title,\n  summary: item.description?.replace(/<[^>]*>/g, '').slice(0, 300),\n  link: item.link,\n  source: item.author || 'Source inconnue',\n  date: item.pubDate\n}));\n\nconst prompt = `Tu es l'assistant de Gilles Anselme, fondateur de Neobik, expert IA basé en Guadeloupe.\n\nGilles écrit une newsletter hebdomadaire sur l'IA pour des entrepreneurs et dirigeants des Antilles-Guyane.\nSon ton : lucide, direct, sans jargon, humain. Il challenge les idées reçues sur l'IA.\n\nVoici les articles de la semaine :\\n${articles.map((a, i) => `${i+1}. ${a.title}\\n${a.summary}\\nLien : ${a.link}`).join('\\n\\n')}\n\nRédige un draft de newsletter avec :\n- Un titre accrocheur (pas de clickbait)\n- Une intro personnelle de 2-3 phrases (style Gilles, ton observateur critique)\n- 3-4 résumés commentés des articles les plus pertinents pour les entrepreneurs antillais (50-80 mots chacun)\n- Une question de réflexion finale\n- Un CTA discret vers neobik.com\n\nFormat : HTML simple. Langue : français. Longueur totale : 400-600 mots.\nNE PAS inventer de faits. Si un article n'est pas clair, dis-le.`;\n\nreturn [{ json: { prompt, articlesCount: articles.length } }];"
+      },
+      "name": "🔧 Prépare le prompt",
+      "type": "n8n-nodes-base.code",
+      "position": [700, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "x-api-key", "value": "VOTRE_CLE_API_ANTHROPIC" },
+            { "name": "anthropic-version", "value": "2023-06-01" },
+            { "name": "content-type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "=",
+              "value": "={{ JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 2000, messages: [{ role: 'user', content: $json.prompt }] }) }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "🤖 Claude génère le draft",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [940, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const response = $json;\nconst content = response.content?.[0]?.text || 'Erreur : pas de contenu généré';\nconst week = new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });\n\nreturn [{ json: { subject: `[DRAFT] Newsletter Neobik — ${week}`, body: content, week } }];"
+      },
+      "name": "📝 Formate le draft",
+      "type": "n8n-nodes-base.code",
+      "position": [1180, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "contact@neobik.com",
+        "toEmail": "contact@neobik.com",
+        "subject": "={{ $json.subject }}",
+        "emailType": "html",
+        "message": "=<div style=\"font-family: sans-serif; max-width: 700px; margin: 0 auto; padding: 20px;\">\n  <div style=\"background: #2B1559; color: white; padding: 20px; border-radius: 4px; margin-bottom: 20px;\">\n    <h2 style=\"color: #07D3D5; margin: 0 0 8px;\">📧 Draft Newsletter Neobik</h2>\n    <p style=\"color: rgba(255,255,255,0.6); margin: 0; font-size: 14px;\">Semaine du {{ $json.week }} · À relire et valider avant envoi</p>\n  </div>\n  <div style=\"background: #fff9f0; border: 2px dashed #07D3D5; padding: 16px; border-radius: 4px; margin-bottom: 20px;\">\n    <p style=\"margin: 0; color: #333; font-size: 14px;\">⚠️ Ce draft est généré par IA. Relire, corriger, valider avant d'envoyer via Brevo.</p>\n  </div>\n  {{ $json.body }}\n  <hr style=\"margin: 24px 0; border-color: #eee;\">\n  <p style=\"font-size: 12px; color: #999;\">Généré automatiquement par n8n · Workflow Neobik Newsletter</p>\n</div>",
+        "options": {}
+      },
+      "name": "📨 Envoie le draft à Gilles",
+      "type": "n8n-nodes-base.emailSend",
+      "position": [1420, 300]
+    }
+  ],
+  "connections": {
+    "⏰ Déclencheur Vendredi 8h": {
+      "main": [[
+        { "node": "📡 MIT Tech Review", "type": "main", "index": 0 },
+        { "node": "📡 Import AI", "type": "main", "index": 0 },
+        { "node": "📡 CNIL", "type": "main", "index": 0 }
+      ]]
+    },
+    "📡 MIT Tech Review": { "main": [[{ "node": "🔧 Prépare le prompt", "type": "main", "index": 0 }]] },
+    "📡 Import AI": { "main": [[{ "node": "🔧 Prépare le prompt", "type": "main", "index": 0 }]] },
+    "📡 CNIL": { "main": [[{ "node": "🔧 Prépare le prompt", "type": "main", "index": 0 }]] },
+    "🔧 Prépare le prompt": { "main": [[{ "node": "🤖 Claude génère le draft", "type": "main", "index": 0 }]] },
+    "🤖 Claude génère le draft": { "main": [[{ "node": "📝 Formate le draft", "type": "main", "index": 0 }]] },
+    "📝 Formate le draft": { "main": [[{ "node": "📨 Envoie le draft à Gilles", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" }
+}
