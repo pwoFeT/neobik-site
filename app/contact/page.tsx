@@ -55,16 +55,32 @@ export default function ContactPage() {
                 4. Cliquez sur "Partager" → copier le lien
                 5. Dans le lien, remplacez /booking/ par /embed-booking/ pour l'iframe
               */}
-              <div className="card-glass overflow-hidden" style={{ height: '600px' }}>
-                <iframe
-                  src="https://calendar.google.com/calendar/appointments/AcZssZ0sxz28hRgXE2Tq6hgUKrqrTFl6OO2PlDQjVEs8=?gv=true"
-                  width="100%"
-                  height="100%"
-                  frameBorder="0"
-                  style={{ border: 0 }}
-                  title="Prendre rendez-vous avec Neobik"
-                />
-              </div>
+              <div className="card-glass p-10 flex flex-col items-center text-center gap-6">
+  <div className="w-16 h-16 bg-cyan/10 border border-cyan/20 flex items-center justify-center">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#07D3D5" strokeWidth="1.5">
+      <rect x="3" y="4" width="18" height="18" rx="2"/>
+      <path d="M16 2v4M8 2v4M3 10h18"/>
+    </svg>
+  </div>
+  <div>
+    <h3 className="font-display text-2xl font-bold mb-2">Choisissez votre créneau</h3>
+    <p className="text-white/60 text-sm leading-relaxed max-w-xs">
+      30 minutes · Gratuit · Sans engagement<br />
+      Confirmation automatique par email
+    </p>
+  </div>
+  
+    href="https://calendar.app.google/Z7J1bmXcvLXD6qu37"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="btn-primary text-base px-10 py-4"
+  >
+    Réserver un créneau →
+  </a>
+  <p className="text-white/30 text-xs font-mono">
+    Propulsé par Google Agenda · Confirmé automatiquement
+  </p>
+</div>
               <p className="text-white/30 text-xs mt-3 font-mono">
                 Propulsé par Google Agenda · Confirmé automatiquement
               </p>
@@ -96,10 +112,10 @@ export default function ContactPage() {
                     </li>
                     <li>
                       <a
-                        href="https://wa.me/590660309595"
+                        href="https://wa.me/590690304095"
                         className="flex items-center gap-3 text-white/70 hover:text-cyan transition-colors"
                       >
-                        <Phone size={18} className="text-cyan" /> +590 660-30-95 (WhatsApp)
+                        <Phone size={18} className="text-cyan" /> +590 690-30-40-95 (WhatsApp)
                       </a>
                     </li>
                     <li>
