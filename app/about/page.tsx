@@ -9,16 +9,8 @@ import ScrollAnimator from '@/components/ui/ScrollAnimator';
 export const metadata: Metadata = {
   title: 'À propos — Gilles Anselme, fondateur de Neobik',
   description:
-    'Gilles Anselme, consultant et formateur IA basé en Guadeloupe. Découvrez l\'histoire de Neobik, la méthode C.O.O.L. et une approche de l\'IA ancrée dans le réel.',
+    "Gilles Anselme, consultant et formateur IA basé en Guadeloupe. Découvrez l'histoire de Neobik, la méthode C.O.O.L. et une approche de l'IA ancrée dans le réel.",
 };
-
-const timeline = [
-  { year: '2009', label: 'Premier lancement entrepreneurial après un licenciement économique (LKP).' },
-  { year: '2025 — Début', label: 'Période de flottement. Usage intensif de l\'IA pour se restructurer. Naissance d\'A.L.F.R.E.D. et de la méthode C.O.O.L.' },
-  { year: '2025 — Juillet', label: 'Création officielle de Neobik. Immatriculation au RNE. Numéro de formation 01973229997.' },
-  { year: '2025 — Été', label: 'Premières formations chez Simplon Guadeloupe. Co-animation de la conférence "Quand le Geek code, la psy décode".' },
-  { year: '2026', label: 'Montée en puissance : conférences institutions, accompagnements entreprises, développement Antilles-Guyane.' },
-];
 
 export default function AboutPage() {
   return (
@@ -41,10 +33,9 @@ export default function AboutPage() {
                 Il commence par une réorganisation forcée.
               </p>
             </div>
-            {/* Stats */}
             <div className="grid grid-cols-2 gap-6">
               {[
-                { num: '15+', label: 'Ans d\'expérience entrepreneuriale' },
+                { num: '15+', label: "Ans d'expérience entrepreneuriale" },
                 { num: '100+', label: 'Apprenants formés' },
                 { num: '3', label: 'Territoires couverts' },
                 { num: '01', label: 'N° formation 01973229997' },
@@ -65,64 +56,45 @@ export default function AboutPage() {
               <div className="section-label mb-6">Mon histoire</div>
               <div className="prose">
                 <p>
-                  Début 2025, face à une période de flottement professionnel et personnel, j&apos;ai utilisé
-                  l&apos;intelligence artificielle non pas comme un outil de performance — mais comme un outil
-                  de structuration de moi-même.
+                  Début 2025, face à une période de flottement professionnel et personnel,
+                  j&apos;ai utilisé l&apos;intelligence artificielle non pas comme un outil de performance,
+                  mais comme un outil de structuration de moi-même.
                 </p>
                 <p>
-                  De cette expérience est née la méthode <strong>C.O.O.L.</strong> (Clarifier · Organiser · Optimiser · Libérer)
-                  et l&apos;assistant <strong>A.L.F.R.E.D.</strong> — mon propre prototype d&apos;agent IA hybride inspiré
-                  d&apos;Alfred Pennyworth, Jarvis, Geoffrey Butler et John McClane.
+                  De cette expérience est né <strong>A.L.F.R.E.D.</strong> — mon propre prototype
+                  d&apos;agent IA hybride, inspiré d&apos;Alfred Pennyworth, Jarvis, Geoffrey Butler et
+                  John McClane. C&apos;est en travaillant avec lui, au quotidien, que j&apos;ai
+                  progressivement formalisé une méthode : <strong>C.O.O.L.</strong> (Clarifier · Organiser · Optimiser · Libérer).
+                  Non pas conçue sur le papier, mais extraite du terrain, de mes propres
+                  ajustements, erreurs et prises de conscience.
                 </p>
                 <p>
-                  Puis est née Neobik, en juillet 2025 : une structure dédiée à ceux qui veulent performer
-                  sans se déshumaniser. Pas une agence. Pas un cabinet. Un accompagnement ancré dans le réel,
-                  né du terrain.
+                  Puis est née Neobik, en juillet 2025 : une structure dédiée à ceux qui veulent
+                  performer sans se déshumaniser. Pas une agence. Pas un cabinet. Un accompagnement
+                  ancré dans le réel, né du terrain.
                 </p>
                 <p>
-                  Aujourd&apos;hui, j&apos;interviens auprès de TPE, PME et organisations des Antilles-Guyane pour
-                  les aider à intégrer l&apos;IA avec méthode, clarté et éthique. Pas pour vendre des outils.
-                  Pour changer la façon dont on travaille et dont on décide.
+                  Aujourd&apos;hui, j&apos;interviens auprès de TPE, PME et organisations des Antilles-Guyane
+                  pour les aider à intégrer l&apos;IA avec méthode, clarté et éthique. Pas pour vendre
+                  des outils. Pour changer la façon dont on travaille et dont on décide.
                 </p>
                 <blockquote>
                   L&apos;IA n&apos;a pas d&apos;éthique, elle n&apos;a que celle de ceux qui la pilotent.
-                  C&apos;est pourquoi je préfère dire "voici ce que j&apos;observe" plutôt que "voici ce que je fais".
+                  C&apos;est pourquoi je préfère dire &ldquo;voici ce que j&apos;observe&rdquo; plutôt que
+                  &ldquo;voici ce que je fais&rdquo;.
                 </blockquote>
               </div>
             </ScrollAnimator>
           </div>
         </section>
 
-        {/* Timeline */}
-        <section className="py-24 px-6 lg:px-12 bg-[#1d0e42]">
-          <div className="max-w-4xl mx-auto">
-            <ScrollAnimator>
-              <div className="section-label mb-4">Parcours</div>
-              <h2 className="font-display text-4xl font-bold mb-12">
-                Les jalons qui ont construit <span className="text-cyan">Neobik.</span>
-              </h2>
-            </ScrollAnimator>
-            <div className="relative pl-8 border-l border-white/10 space-y-10">
-              {timeline.map((item, i) => (
-                <ScrollAnimator key={i} delay={i * 100}>
-                  <div className="relative">
-                    <div className="absolute -left-10 w-3 h-3 bg-cyan rounded-full mt-1.5" />
-                    <div className="font-mono text-cyan text-sm mb-2">{item.year}</div>
-                    <p className="text-white/70 leading-relaxed">{item.label}</p>
-                  </div>
-                </ScrollAnimator>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* ALFRED */}
-        <section className="py-24 px-6 lg:px-12">
+        <section className="py-24 px-6 lg:px-12 bg-[#1d0e42]">
           <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
             <ScrollAnimator>
               <div className="section-label mb-4">Mon assistant IA</div>
               <h2 className="font-display text-4xl font-bold mb-6">
-                <span className="text-cyan">A.L.F.R.E.D.</span> —<br />
+                <span className="text-cyan">A.L.F.R.E.D.</span> &mdash;<br />
                 l&apos;IA qui m&apos;a rendu meilleur<br />avant d&apos;aider les autres.
               </h2>
               <p className="text-white/60 text-lg leading-relaxed mb-6">
@@ -158,7 +130,7 @@ export default function AboutPage() {
         </section>
 
         {/* CTA */}
-        <section className="py-20 px-6 lg:px-12 bg-[#1d0e42]">
+        <section className="py-20 px-6 lg:px-12">
           <div className="max-w-2xl mx-auto text-center">
             <ScrollAnimator>
               <h2 className="font-display text-3xl font-bold mb-4">
