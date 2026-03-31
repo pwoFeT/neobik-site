@@ -89,7 +89,7 @@ export default function ContactPage() {
                     </li>
                     <li>
                       <a href="https://wa.me/590690304095" className="flex items-center gap-3 text-white/70 hover:text-cyan transition-colors">
-                        <Phone size={18} className="text-cyan" /> +590 690-30-40-95 (WhatsApp)
+                        <Phone size={18} className="text-cyan" /> +590 690 30 40 95 (WhatsApp)
                       </a>
                     </li>
                     <li>
